@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/storage';
 
@@ -15,20 +14,13 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 export const uploadImage = async (file: any, clothingType: string) => {
-  console.log('clothingType',clothingType)
     const storage = getStorage();
     const storageRef = ref(storage, `${clothingType}/${file.name}`);
 
     const uploadTask = uploadBytesResumable(storageRef, file);
 
-    console.log('uploadTask',uploadTask)
-
     uploadTask.on('state_changed',(snapshot) => {},(error) => {
-      console.log('error',error)
     },() => {
-      
-        // Handle successful uploads on complete
-    // For instance, get the download URL: https://firebasestorage.googleapis.com/...
     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
         console.log('File available at', downloadURL);
       });
@@ -36,7 +28,6 @@ export const uploadImage = async (file: any, clothingType: string) => {
 }
 
 export const fetchImages = async (clothingType: string) => {
-  console.log('clothingType',clothingType)
   
   try {
     const storage = getStorage();
@@ -53,8 +44,7 @@ export const fetchImages = async (clothingType: string) => {
       })
     );
 
-    console.log('Image URLs:', imageUrls);
-    return imageUrls; // Retorna a lista de URLs para exibir as imagens no seu app
+    return imageUrls;
 
   } catch (error) {
     console.error("Error fetching images:", error);
