@@ -1,29 +1,27 @@
-import { Button } from '@mui/material';
+import { Button, Input, Typography } from '@mui/material';
 import React from 'react';
 import { uploadImage } from '../../firebase';
-import ImageGallery from '../../ImageGallery';
+import { uploadPhotosContainer, typography, addClothesContainer } from './style';
 
 const UploadPhotos = () => {
   return (
-    <div className="App">
-    <header className="App-header">
-      <p>
+    <div style={uploadPhotosContainer}>
+      <Typography variant='h3' style={typography}>
        Meu guarda roupa virtual
-      </p>
-      <p>
+      </Typography>
+      <Typography variant='h6' style={typography}>
        Adicione peças de roupas e monte looks
-      </p>
-      <div className="button-container">
-        <Button variant="contained" component="label" >
-        {"Adicionar parte de cima"}
+      </Typography>
+      <div style={addClothesContainer}>
+        <Button variant="contained" component="label"  style={{backgroundColor: 'black'}}>
+        {"Adicionar peça de cima"}
           <input hidden type="file" onChange={(e) => { if (e.target.files) uploadImage(e.target.files[0], 'top-clothes'); }} id='uploadUpImage'/>
         </Button>
-        <Button variant="contained" component="label" >
-        {"Adicionar parte de baixo"}
+        <Button variant="contained" component="label" style={{backgroundColor: 'black'}}>
+        {"Adicionar peça de baixo"}
         <input hidden type="file" onChange={(e) => { if (e.target.files) uploadImage(e.target.files[0], 'underwear'); }} id='uploadUnderwearImage'/>        
         </Button>
       </div>
-    </header>
   </div>
   );
 };

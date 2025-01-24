@@ -1,13 +1,41 @@
-import React from 'react';
-import ImageGallery from '../../ImageGallery';
+import React, { useEffect, useState } from 'react';
+import { createLooksContainer } from './style';
+import Carousel from '../../components/Carousel';
+import { fetchImages } from '../../firebase';
+import { Typography } from '@mui/material';
 
-const CreateLooks = () => {
+
+const CreateLooks: React.FC = () => {
+  const [topClothes, setTopClothes] = useState<string[]>([]);
+  const [underwear, setUnderwear] = useState<string[]>([]);
+
+  useEffect(() => {
+      const getImages = async () => {
+        const urls: string[] | undefined = await fetchImages('top-clothes');
+        if (urls) {
+          setTopClothes(urls);
+        }
+      };
+  
+      getImages();
+    },[]);
+
+  useEffect(() => {
+    const getImages = async () => {
+      const urls: string[] | undefined = await fetchImages('underwear');
+      if (urls) {
+        setUnderwear(urls);
+      }
+    };
+
+    getImages();
+  },[]);
+    
   return (
-    <div style={{ justifyContent: 'center', alignItems: 'center', display: 'flex', flexDirection: 'column' }}>
-      <h2>Crie seus looks</h2>
-      <p>crie seus looks passando pelas suas camisetas, calças ou shorts</p>
-      <ImageGallery clothingType='top-clothes'/>
-      <ImageGallery clothingType='underwear'/>
+    <div style={createLooksContainer}>
+      <Typography variant='h6'>Crie seu look passando pelas suas camisetas, calças ou shorts</Typography>
+      <Carousel images={topClothes}/>
+      <Carousel images={underwear}/>
     </div>
   )
 }
