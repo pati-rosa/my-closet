@@ -14,7 +14,7 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 
-export const uploadImage = async (file, clothingType) => {
+export const uploadImage = async (file: any, clothingType: string) => {
   console.log('clothingType',clothingType)
     const storage = getStorage();
     const storageRef = ref(storage, `${clothingType}/${file.name}`);
@@ -35,12 +35,16 @@ export const uploadImage = async (file, clothingType) => {
     });   
 }
 
-export const fetchImages = async (clothingType) => {
+export const fetchImages = async (clothingType: string) => {
+  console.log('clothingType',clothingType)
+  
   try {
     const storage = getStorage();
     const folderRef = ref(storage, clothingType); 
 
     const result = await listAll(folderRef);
+
+    console.log(result)
 
     const imageUrls = await Promise.all(
       result.items.map(async (itemRef) => {

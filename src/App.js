@@ -1,38 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
-import { useState } from 'react';
-import { fetchImages, uploadImage } from './firebase'; // Ou o caminho do seu arquivo
-import { Input, Button } from '@mui/material';
-function  App() {
+import CreateLooks from './features/CreateLooks';
+import UploadPhotos from './features/UploadPhotos';
 
-  let fetchTopClothes = fetchImages("top-clothes")
-  let fetchUnderwear = fetchImages("underwear")
-  console.log('fetch',fetchTopClothes,fetchUnderwear)
+import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 
-  
+const Navbar = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        {/* <img src={logo} className="App-logo" alt="logo" /> */}
-        <p>
-         Meu guarda roupa virtual
-        </p>
-        <p>
-         Adicione peças de roupas e monte looks
-        </p>
-        <div className="button-container">
-          <Button variant="contained" component="label" >
-          {"Adicionar parte de cima"}
-            <input hidden type="file" onChange={(e) => uploadImage(e.target.files[0],'top-clothes')} id='uploadUpImage'/>
-          </Button>
+    <nav style={{ padding: '10px', backgroundColor: '#f8f8f8', borderBottom: '1px solid #ddd' }}>
+      <ul style={{ display: 'flex', listStyleType: 'none', margin: 0, padding: 0 }}>
+        <li style={{ marginRight: '20px' }}>
+          <Link to="/" style={{ textDecoration: 'none', color: 'blue' }}>Adicionar roupas</Link>
+        </li>
+        <li style={{ marginRight: '20px' }}>
+          <Link to="/create-looks" style={{ textDecoration: 'none', color: 'blue' }}>Criar Looks</Link>
+        </li>
+        <li>
+          <Link to="/create-looks" style={{ textDecoration: 'none', color: 'blue' }}>Combinações de cores</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+};
 
-          <Button variant="contained" component="label" >
-          {"Adicionar parte de baixo"}
-          <input hidden type="file" onChange={(e) => uploadImage(e.target.files[0],'underwear')} id='uploadUnderwearImage'/>        
-          </Button>
-        </div>
-      </header>
-    </div>
+function  App() {
+  return (
+    <BrowserRouter>
+      <Navbar /> 
+      <Routes>
+        <Route path="/" element={<UploadPhotos />} />
+        <Route path="/create-looks" element={<CreateLooks />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
