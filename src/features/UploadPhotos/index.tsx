@@ -1,6 +1,6 @@
 import { Button, Input, Typography } from '@mui/material';
 import React from 'react';
-import { uploadImage } from '../../firebase';
+import { uploadImage } from '../../utils/firebase';
 import { uploadPhotosContainer, typography, addClothesContainer } from './style';
 
 const UploadPhotos = () => {

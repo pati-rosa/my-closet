@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createLooksContainer } from './style';
 import Carousel from '../../components/Carousel';
-import { fetchImages } from '../../firebase';
+import { fetchImages } from '../../utils/firebase';
 import { Typography } from '@mui/material';
 
 
