@@ -3,9 +3,10 @@ import { carouselContainer, imageContent, button } from './style';
 
 interface CarouselProps {
     images: string[];
+    imageState: string;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
+const Carousel: React.FC<CarouselProps> = ({ images, imageState }) => {
     const [curentIndex, setCurentIndex] = useState(0);
 
     const handlePrevClick = () => {
@@ -18,9 +19,15 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
 
     return(
         <div style={carouselContainer}>
-            <button style={button} onClick={handlePrevClick}>{'<'}</button>
-            <img src={images[curentIndex]} style={imageContent}/>
-            <button style={button} onClick={handleNextClick}>{'>'}</button>
+            {imageState === 'loading' && <p>Carregando...</p>}
+            {imageState === 'error' && <p>Erro ao carregar as imagens</p>}
+            {imageState === 'success' && (
+            <>
+                <button style={button} onClick={handlePrevClick}>{'<'}</button>
+                <img src={images[curentIndex]} style={imageContent}/>
+                <button style={button} onClick={handleNextClick}>{'>'}</button>
+            </>)
+            }
         </div>
     )
    
