@@ -11,6 +11,7 @@ const useFirebaseUpload = (file: any, clothingType: string) => {
     
     const uploadImage = async (file: any, clothingType: string) => {
         try {
+            setUploadState('loading')
             const storage = getStorage();
             const storageRef = ref(storage, `${clothingType}/${file.name}`);
         

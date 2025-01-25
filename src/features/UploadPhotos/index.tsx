@@ -29,15 +29,15 @@ const UploadPhotos = () => {
           {"Adicionar peça de cima"}
           <input hidden type="file" onChange={(e) => handleFileChange(e, setFileTopClothes)} id='uploadUpImage' />
         </Button>
-        {uploadStateTopClothes === 'loading' && <p>Uploading...</p>}
-        {uploadStateTopClothes === 'success' && <p>Upload successful!</p>}
+        {uploadStateTopClothes === 'loading' && <p>Carregando...</p>}
+        {uploadStateTopClothes === 'success' && <p>Adicionado com sucesso!</p>}
 
         <Button variant="contained" component="label" style={{ backgroundColor: 'black' }}>
           {"Adicionar peça de baixo"}
           <input hidden type="file" onChange={(e) => handleFileChange(e, setFileUnderwear)} id='uploadUnderwearImage' />
         </Button>
-        {uploadStateUnderwear === 'loading' && <p>Uploading...</p>}
-        {uploadStateUnderwear === 'success' && <p>Upload successful!</p>}
+        {uploadStateUnderwear === 'loading' && <p>Carregando...</p>}
+        {uploadStateUnderwear === 'success' && <p>Adicionado com sucesso!</p>}
       </div>
     </div>
   );
