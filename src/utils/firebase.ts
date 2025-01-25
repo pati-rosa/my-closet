@@ -2,7 +2,7 @@ import { initializeApp } from 'firebase/app';
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, listAll } from 'firebase/storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBtMgNns29p_GfZiDifXmWTUkaGPaHb7aY",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "meu-guardaroupa.firebaseapp.com",
   projectId: "meu-guardaroupa",
   storageBucket: "meu-guardaroupa.firebasestorage.app",
