@@ -12,14 +12,14 @@ const Navbar = () => {
 
     return (
         <div style={navbarStyle}>
-            <div style={itemStyle()} onClick={() => handleNavigation('/')}>
+            <div style={itemStyle()} onClick={() => handleNavigation('/upload-photos')}>
                 Adicionar roupas
             </div>
             <div style={itemStyle()} onClick={() => handleNavigation('/create-looks')}>
                Criar looks
             </div>
-            <div style={itemStyle(false)} onClick={() => handleNavigation('/combine-clothes')}>
-                Combinar cores
+            <div style={itemStyle(false)} onClick={() => handleNavigation('/config-account')}>
+                Configuração de conta
             </div>
         </div>
     );

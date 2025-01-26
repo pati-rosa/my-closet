@@ -4,9 +4,10 @@ import { carouselContainer, imageContent, button } from './style';
 interface CarouselProps {
     images: string[];
     imageState: string;
+    clothType: 'top-clothes' | 'underwear';
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images, imageState }) => {
+const Carousel: React.FC<CarouselProps> = ({ images, imageState, clothType }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [startTouch, setStartTouch] = useState(0);
     const [isDragging, setIsDragging] = useState(false);
@@ -85,12 +86,12 @@ const Carousel: React.FC<CarouselProps> = ({ images, imageState }) => {
         >
             {imageState === 'loading' && <p>Carregando...</p>}
             {imageState === 'error' && <p>Erro ao carregar as imagens</p>}
-            {imageState === 'success' && (
+            {imageState === 'success' && images.length > 0? (
             <>
                 <button style={button} onClick={handlePrevClick}>{'<'}</button>
                 <img draggable={false} src={images[currentIndex]} style={imageContent}/>
                 <button style={button} onClick={handleNextClick}>{'>'}</button>
-            </>)
+            </>) : <p>Você ainda não cadastrou suas peças de {clothType === 'top-clothes' && 'cima'} {clothType === 'underwear' && 'baixo'} </p>
             }
         </div>
     )

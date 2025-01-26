@@ -5,14 +5,16 @@ import { auth } from '../../utils/firebase';
 import { Container, Box, TextField, Button, Typography, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '../../context/useUser';
+import useFirebaseCreateUser from '../../hooks/useFirebaseCreateUser';
+import { useAuth } from '../../hooks/useFirebaseAuth';
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
 
   const navigate = useNavigate()
   const { setUid } = useUser()
+  const { signUp, user,error} = useAuth()
 
   const handleNavigation = (path: string) => {
       navigate(path); 
@@ -20,15 +22,15 @@ const Register: React.FC = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(userCredential)
-        const uid = userCredential.user.uid;
-        setUid(uid);
-        alert('User created successfully!');
-        handleNavigation('/upload-photos');
-    } catch (error: any) {
-      setError(error.message);
+    signUp(email, password);
+    const uid = user?.user.uid
+    if (uid) {
+      setUid(uid);
+      alert('Usuário criado com sucesso!');
+      handleNavigation('/upload-photos');
+    }
+    if (error) {
+      alert('Erro ao criar usuário'+error);
     }
   };
 
@@ -42,7 +44,7 @@ const Register: React.FC = () => {
         minHeight="100vh"
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          Register
+          Registrar
         </Typography>
         <form onSubmit={handleRegister} style={{ width: '100%' }}>
           <TextField
@@ -75,7 +77,7 @@ const Register: React.FC = () => {
             fullWidth
             style={{ marginTop: '16px' }}
           >
-            Register
+            Criar conta
           </Button>
         </form>
       </Box>

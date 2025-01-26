@@ -7,7 +7,8 @@ import Register from './features/Register';
 import UploadPhotos from './features/UploadPhotos';
 import CreateLooks from './features/CreateLooks';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { UserProvider } from './context/useUser';
+import { UserProvider, useUser } from './context/useUser';
+import { ConfigAccount } from './features/ConfigAccount';
 
 const App: React.FC = () => {
   const queryClient = new QueryClient()
@@ -16,7 +17,7 @@ const App: React.FC = () => {
     <QueryClientProvider client={queryClient}>
       <UserProvider>
         <Router>
-          <Main />
+          <Main/>
         </Router>
       </UserProvider>
     </QueryClientProvider>
@@ -26,6 +27,7 @@ const App: React.FC = () => {
 
 const Main: React.FC = () => {
   const location = useLocation();
+  const {uid}= useUser();
   const showNavBar = location.pathname !== '/';
 
   return (
@@ -35,6 +37,7 @@ const Main: React.FC = () => {
         <Route path="/" element={<Register />} />
         <Route path="/upload-photos" element={<UploadPhotos />} />
         <Route path="/create-looks" element={<CreateLooks />} />
+        <Route path="/config-account" element={<ConfigAccount />} />
       </Routes>
     </div>
   );
