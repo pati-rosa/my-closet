@@ -15,11 +15,11 @@ const App: React.FC = () => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <UserProvider>
         <Router>
+        <UserProvider>
           <Main/>
-        </Router>
-      </UserProvider>
+          </UserProvider>
+        </Router>    
     </QueryClientProvider>
 
   );

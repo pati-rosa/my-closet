@@ -91,7 +91,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, imageState, clothType }) =>
                 <button style={button} onClick={handlePrevClick}>{'<'}</button>
                 <img draggable={false} src={images[currentIndex]} style={imageContent}/>
                 <button style={button} onClick={handleNextClick}>{'>'}</button>
-            </>) : <p>Você ainda não cadastrou suas peças de {clothType === 'top-clothes' && 'cima'} {clothType === 'underwear' && 'baixo'} </p>
+            </>) : <p>Você ainda não cadastrou {clothType === 'top-clothes' && 'suas blusinhas'} {clothType === 'underwear' && 'suas calças e shorts'} </p>
             }
         </div>
     )
