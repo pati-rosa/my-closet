@@ -1,8 +1,9 @@
 import { getDownloadURL, getStorage, listAll, ref } from "@firebase/storage";
 import { initializeApp } from "firebase/app";
 import { firebaseConfig } from "../config/firebase";
+import { getAuth } from "firebase/auth";
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
 
 const fetchImages = async (clothingType: string) => {
     const storage = getStorage();
@@ -17,4 +18,6 @@ const fetchImages = async (clothingType: string) => {
     return imageUrls;
   };
 
-  export {fetchImages} 
+  const auth = getAuth(app);
+
+  export {fetchImages, auth} 

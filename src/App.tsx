@@ -1,28 +1,43 @@
+// filepath: /Users/patirosa/Documents/my-closet/src/App.tsx
 import React from 'react';
-import { QueryClient, QueryClientProvider } from 'react-query';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-import CreateLooks from './features/CreateLooks';
+import NavBar from './components/NavBar';
+import Register from './features/Register';
 import UploadPhotos from './features/UploadPhotos';
-import Navbar from './components/NavBar';
+import CreateLooks from './features/CreateLooks';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { UserProvider } from './context/useUser';
 
-import './App.css';
+const App: React.FC = () => {
+  const queryClient = new QueryClient()
 
-const queryClient = new QueryClient();
-
-function  App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Navbar/> 
-        <Routes>
-          <Route path="/" element={<UploadPhotos />} />
-          <Route path="/create-looks" element={<CreateLooks />} />
-        </Routes>
-      </BrowserRouter>
+      <UserProvider>
+        <Router>
+          <Main />
+        </Router>
+      </UserProvider>
     </QueryClientProvider>
 
   );
-}
+};
+
+const Main: React.FC = () => {
+  const location = useLocation();
+  const showNavBar = location.pathname !== '/';
+
+  return (
+    <div>
+      {showNavBar && <NavBar />}
+      <Routes>
+        <Route path="/" element={<Register />} />
+        <Route path="/upload-photos" element={<UploadPhotos />} />
+        <Route path="/create-looks" element={<CreateLooks />} />
+      </Routes>
+    </div>
+  );
+};
 
 export default App;
