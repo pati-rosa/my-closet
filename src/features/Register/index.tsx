@@ -1,11 +1,9 @@
 // filepath: /Users/patirosa/Documents/my-closet/src/components/Register.tsx
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../utils/firebase';
-import { Container, Box, TextField, Button, Typography, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Container, Box, TextField, Button, Typography, Alert } from '@mui/material';
+
 import { useUser } from '../../context/useUser';
-import useFirebaseCreateUser from '../../hooks/useFirebaseCreateUser';
 import { useAuth } from '../../hooks/useFirebaseAuth';
 
 const Register: React.FC = () => {

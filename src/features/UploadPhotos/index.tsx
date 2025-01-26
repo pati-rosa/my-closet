@@ -1,5 +1,6 @@
-import { Button, Typography } from '@mui/material';
 import React, { useState } from 'react';
+import { Button, Typography } from '@mui/material';
+
 import useFirebaseUpload from '../../hooks/useFirebaseUpload';
 import { uploadPhotosContainer, typography, addClothesContainer } from './style';
 

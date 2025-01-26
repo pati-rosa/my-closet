@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { createLooksContainer } from './style';
-import Carousel from '../../components/Carousel';
+import React from 'react';
 import { Typography } from '@mui/material';
 import { useQuery } from 'react-query';
+
 import { fetchImages } from '../../utils/firebase';
+import Carousel from '../../components/Carousel';
 import { useUser } from '../../context/useUser';
+
+import { createLooksContainer } from './style';
+
 
 
 const CreateLooks: React.FC = () => {

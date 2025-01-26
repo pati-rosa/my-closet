@@ -1,7 +1,7 @@
-import { Button } from "@mui/material";
 import React from "react";
+import { Button } from "@mui/material";
+
 import { useUser } from "../../context/useUser";
-import { useAuth } from "../../hooks/useFirebaseAuth";
 import { configAccountContainer } from "./styles";
 
 export const ConfigAccount = () => {

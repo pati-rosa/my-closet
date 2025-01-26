@@ -1,6 +1,6 @@
-import { signOut } from 'firebase/auth';
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+
 import { useAuth } from '../hooks/useFirebaseAuth';
 
 interface UserContextType {
