@@ -18,12 +18,13 @@ export const useAuth = () => {
 
   const signUp = async (email: string, password: string) => {
     setState({ loading: true, error: null, user: null });
-
     try {
       const userCredential = await createUser(email, password);
       setState({ loading: false, error: null, user: userCredential });
+      return userCredential
     } catch (error) {
       setState({ loading: false, error: (error as any).message, user: null });
+      return null
     }
   };
 

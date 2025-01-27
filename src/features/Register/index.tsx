@@ -12,7 +12,7 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate()
   const { setUid } = useUser()
-  const { signUp, user,error} = useAuth()
+  const { signUp,error} = useAuth()
 
   const handleNavigation = (path: string) => {
       navigate(path); 
@@ -20,15 +20,12 @@ const Register: React.FC = () => {
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
-    signUp(email, password);
-    const uid = user?.user.uid
-    if (uid) {
+    const userCredential = await signUp(email, password);
+    if (userCredential) {
+      const uid = userCredential.user.uid;
       setUid(uid);
       alert('Usuário criado com sucesso!');
       handleNavigation('/upload-photos');
-    }
-    if (error) {
-      alert('Erro ao criar usuário'+error);
     }
   };
 
@@ -42,7 +39,13 @@ const Register: React.FC = () => {
         minHeight="100vh"
       >
         <Typography variant="h4" component="h1" gutterBottom>
-          Registrar
+          Meu guarda roupa virtual
+        </Typography>
+        <Typography variant="h5" component="h1" gutterBottom>
+          Coloque todas suas roupas em um só lugar e monte looks incríveis!
+        </Typography>
+        <Typography variant="h5" component="h1" gutterBottom>
+          Receba a ajuda de estilistas renomados!
         </Typography>
         <form onSubmit={handleRegister} style={{ width: '100%' }}>
           <TextField
@@ -65,7 +68,8 @@ const Register: React.FC = () => {
           />
           {error && (
             <Alert severity="error" style={{ marginTop: '16px' }}>
-              {error}
+              {error === "Firebase: Error (auth/email-already-in-use)." && "Email já cadastrado"}
+              {error === "Firebase: Password should be at least 6 characters (auth/weak-password)." && "Senha deve ter no mínimo 6 caracteres"}
             </Alert>
           )}
           <Button
@@ -73,7 +77,7 @@ const Register: React.FC = () => {
             variant="contained"
             color="primary"
             fullWidth
-            style={{ marginTop: '16px' }}
+            style={{ marginTop: '16px', backgroundColor: 'black' }}
           >
             Criar conta
           </Button>

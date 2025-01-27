@@ -13,9 +13,19 @@ import { createLooksContainer } from './style';
 const CreateLooks: React.FC = () => {
   const { uid } = useUser();
 
-  const { data: topClothes, status: statusTopClothes } = useQuery('top-clothes', () => fetchImages('top-clothes',uid));
-  const { data: underwear, status: statusUnderwear } = useQuery('underwear', () => fetchImages('underwear',uid));
+  const { data: topClothes, status: statusTopClothes } = useQuery(
+    ['top-clothes', uid],
+    () => fetchImages('top-clothes', uid),
+    { enabled: !!uid }
+  );
 
+  const { data: underwear, status: statusUnderwear } = useQuery(
+    ['underwear', uid],
+    () => fetchImages('underwear', uid),
+    { enabled: !!uid }
+  );
+  
+  console.log('statusTopClothes',statusTopClothes)
   return (
     <div style={createLooksContainer}>
       <Typography variant='h6'>Crie seu look passando pelas suas camisetas, calças ou shorts</Typography>

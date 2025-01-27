@@ -32,7 +32,6 @@ const Carousel: React.FC<CarouselProps> = ({ images, imageState, clothType }) =>
     };
 
     const handleMouseUp = (e: React.MouseEvent) => {
-        console.log('mouse up',e.clientX);
         if (!isDragging) return;
         const endTouch = e.clientX;
         if (endTouch - startTouch > 50) {
@@ -86,13 +85,13 @@ const Carousel: React.FC<CarouselProps> = ({ images, imageState, clothType }) =>
         >
             {imageState === 'loading' && <p>Carregando...</p>}
             {imageState === 'error' && <p>Erro ao carregar as imagens</p>}
-            {imageState === 'success' && images.length > 0? (
+            {imageState === 'success' && (images.length > 0? (
             <>
                 <button style={button} onClick={handlePrevClick}>{'<'}</button>
                 <img draggable={false} src={images[currentIndex]} style={imageContent}/>
                 <button style={button} onClick={handleNextClick}>{'>'}</button>
             </>) : <p>Você ainda não cadastrou {clothType === 'top-clothes' && 'suas blusinhas'} {clothType === 'underwear' && 'suas calças e shorts'} </p>
-            }
+            )}
         </div>
     )
    

@@ -27,7 +27,6 @@ const App: React.FC = () => {
 
 const Main: React.FC = () => {
   const location = useLocation();
-  const {uid}= useUser();
   const showNavBar = location.pathname !== '/';
 
   return (
